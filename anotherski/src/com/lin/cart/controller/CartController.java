@@ -1,5 +1,8 @@
 package com.lin.cart.controller;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lin.entity.CartItem;
 import com.lin.cart.service.Cart;
 import com.lin.entity.Product;
 import com.lin.entity.User;
@@ -81,6 +85,25 @@ public class CartController {
 	public String delOne(@RequestParam("productId") int productId,HttpSession session,Cart c){
 		 c = (Cart)session.getAttribute("cart");
 		 c.container.remove(productId);
+		return "checkout";
+	}
+	/*
+	 * 删除所有商品
+	 */
+	public String delAll(@RequestParam("productId") int productId,HttpSession session,Cart c){
+		/* c = (Cart)session.getAttribute("cart");
+		 Iterator <Integer> i = c.container.keySet().iterator();
+		while(i.hasNext()){
+			int a = i.next();
+			 c.container.remove(a);		
+			 }*/
+		 c = (Cart)session.getAttribute("cart");
+		Iterator<Map.Entry<Integer, CartItem>> i= c.container.entrySet().iterator();
+		while(i.hasNext()){
+			Map.Entry<Integer,CartItem> entry = i.next();
+			i.remove();
+			
+		}
 		return "checkout";
 	}
     /*
