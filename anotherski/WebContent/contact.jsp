@@ -1,15 +1,11 @@
-<%@page import="com.lin.entity.CartItem"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.lin.cart.service.Cart"%>
-    <%@ page import="java.util.Iterator"%>
-    <%@ page import="com.lin.entity.User"%>
-     <%@ page import="com.lin.entity.CartItem"%>
-     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <c:set var="ctx" value="${pageContext.request.contextPath}" />
+    pageEncoding="UTF-8"%>
+   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   <c:set var="ctx" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>购物车</title>
+<title>联系我们</title>
 <link href="${ctx}/css/bootstrap.css" rel='stylesheet' type='text/css' />
 <link href="${ctx}/css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -48,52 +44,6 @@
             });
         });
      </script>
-     <!-- slide -->
-<style>
-	p.p_num {
-    width: 78px;
-    height: 24px;
-    border-top: solid 1px #d0d0d0;
-    position: relative;
-    border-bottom: solid 1px #d0d0d0;
-    margin-top: -3px;
-}
- 
-span.sy_minus,span.sy_plus {
-    width: 15px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    display: block;
-    position: absolute;
-    top: 0px;
-    font-size: 14px;
-    border: solid 1px #d0d0d0;
-    background: #ebebeb;
-    cursor: pointer;
-    border-top: none;
-    border-bottom: none;
-}
- 
-span.sy_minus {
-    left: 0px;
-}
- 
-span.sy_plus {
-    right: 0px;
-}
- 
-input.sy_num {
-    width: 44px;
-    height: 18px;
-    line-height: 24px;
-    text-align: center;
-    position: absolute;
-    top: 0px;
-    left: 17px;
-}
- 
-</style>
  </head>
 <body>
 	<div class="header">
@@ -162,63 +112,43 @@ input.sy_num {
      <div class="main">
       <div class="shop_top">
 		<div class="container">
-		<h1>checkout</h1>
-	    <% Cart c = (Cart)session.getAttribute("cart");
-		if(c == null||c.container.size()==0){%>
-			<h4 class="title">购物车是空的</h4>
-			<p class="cart">您的购物车中没有商品<br>点击<a href="${ctx }/shop.jsp"> 这里</a> 继续购物</p>
-			<%}else{
-				int totalprice = 0;
-				int count = 0;
-				Iterator i = c.container.values().iterator();
-			%> 
-			<table><tr><td></td><td>商品</td><td>单价</td><td>详情</td><td>数量</td><td>总价</td><td>批量操作</td></tr>
-			<%	while(i.hasNext()){
-				CartItem ci = (CartItem)i.next();
-			 %>
-			 <tr>
-			   <td><input type="checkbox" name="cartcheckbox" onclick="selectSingle()"></td>
-			   <td class="col-md-3 shop_box"><a href="${ctx}/single.html"><img src="${ctx}/images/pic5.jpg" class="img-responsive" alt=""/></a>
-			   <div class="sed">
-							<h5><%=ci.getProduct().getProductName() %></h5>
-						
-			    </div>
-			    <div class="clearfix"> </div></td>
-			   </td>
-			   <td><h5><%=ci.getProduct().getPrice() %></h5></td>
-			   <td><h5><%=ci.getProduct().getProductInfo() %></h5></td>
-			   <td>
-				    <p class="p_num">
-							<a href="${ctx }/cart/jian?productId=<%=ci.getProduct().getId()%>"><span class="sy_minus" id="sy_minus_gid1">-</span></a>
-				            <input class="sy_num" id="sy_num_gid1"  type="text" name="number1" value="<%=ci.getCount() %>" /> 
-				            <a href="${ctx }/cart/jia?productId=<%=ci.getProduct().getId()%>"><span class="sy_plus" id="sy_plus_gid1">+</span></a>
-				    </p>
-			   </td>		
-			   <td><%=ci.getProduct().getPrice()*ci.getCount() %></td>
-			   <td><a href="${ctx }/cart/del?productId=<%=ci.getProduct().getId()%>"><img src="${ctx }/images/laji.jpg" width="15px" height="20px"/></a></td>
-						<%
-							totalprice +=ci.getProduct().getPrice()*ci.getCount();
-							count+=ci.getCount();
-						%>
-			   </tr>
-			       <%} 
-			        out.print("<tr><td colspan='5'></td><td>合计:"+totalprice+"<td></tr>");
-					session.setAttribute("totalprice", totalprice);
-					session.setAttribute("count", count);
-					%>
-					<tr>
-						<td><input id="allCheckBox" type="checkbox" value="" onclick="selectAll()" />全选</td>
-						
-					</tr>
-					<%
-						User user = (User)session.getAttribute("u");
-					%>
-					<tr><td><a href="${ctx }/cart/delAll"><img src="${ctx }/images/del.jpg" width="98px" height="25px"/></a></td>
-					<td colspan="3"></td><td colspan="3" align="right"><a href="${ctx }/shop.jsp" class=" to-buy" >继续购物</a>&nbsp;&nbsp;
-					<a href="${ctx }/order/add" class=" to-buy" >生成订单</a></td>
-			</table>
-			
- 		<%} %> 
+			<div class="row">
+				<div class="col-md-7">
+				  <div class="map">
+					<iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265&amp;output=embed"></iframe><br><small><a href="https://maps.google.co.in/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Lighthouse+Point,+FL,+United+States&amp;aq=4&amp;oq=light&amp;sll=26.275636,-80.087265&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=Lighthouse+Point,+Broward,+Florida,+United+States&amp;t=m&amp;z=14&amp;ll=26.275636,-80.087265" style="color:#666;text-align:left;font-size:12px"></a></small>
+				  </div>
+				</div>
+				<div class="col-md-5">
+					<p class="m_8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高山滑雪，起源于阿尔卑斯山地域，又称“阿尔卑斯滑雪”或“山地滑雪”。奥运会高山滑雪设10小项，男女各五项。男子项目设：滑降、回转、大回转、超级大回转、全能（滑降/回转）；女子项目设：滑降、回转、大回转、超级大回转、全能（滑降/回转）。该项运动将速度与技巧完美地结合在一起，运动员在滑行过程中左右盘旋，将健美与优雅融于一体，粗犷中不失儒雅，所以，一直深受广大观众的欢迎。</p>
+					<div class="address">
+				                <p>河北省，石家庄市</p>
+						   		<p>河北师大，软件学院</p>
+						   		<p>中国</p>
+				   		<p>电话:(00) 222 666 444</p>
+				   		<p>传真: (000) 000 00 00 0</p>
+				 	 	<p>邮箱: <span>support[at]snow.com</span></p>
+				   		<p>其他联系方式: <span>Facebook</span>, <span>推特</span></p>
+				   </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 contact">
+				  <form method="post" action="contact-post.html">
+					<div class="to">
+                     	<input type="text" class="text" value="姓名" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
+					 	<input type="text" class="text" value="邮件" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+					 	<input type="text" class="text" value="主题" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject';}">
+					</div>
+					<div class="text">
+	                   <textarea value="消息" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">消息:</textarea>
+	                   <div class="form-submit">
+			           <input name="submit" type="submit" id="submit" value="提交"><br>
+			           </div>
+	                </div>
+	                <div class="clear"></div>
+                   </form>
+			     </div>
+		    </div>
 	     </div>
 	   </div>
 	  </div>
@@ -266,7 +196,8 @@ input.sy_num {
 							  <li class="pinterest"><a href="#"><span> </span></a></li>	
 							  <li class="youtube"><a href="#"><span> </span></a></li>										  				
 						    </ul>
-		   				</ul>
+		   					
+						</ul>
 					</div>
 				</div>
 				<div class="row footer_bottom">

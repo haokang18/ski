@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +27,14 @@ public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
 	this.userServiceImpl = userServiceImpl;
 }
 @RequestMapping(value="/login", method=RequestMethod.POST)
- public String login(@RequestParam("address") String address,@RequestParam("password") String password,Model model,HttpSession session){
+ public String login(@RequestParam("address") String address,@RequestParam("password") String password,HttpSession session){
 	  User u = this.userServiceImpl.login(address, password);
 	  if(u!=null){
 		  session.setAttribute("u", u);
 		  return "index";
 	  }else{
-		  model.addAttribute("errorinfo","您的账号密码不正确");
-		  return "register";
+		 JOptionPane.showMessageDialog(null,"您的账号密码不正确");
+		  return "login";
 	  }
  }
 @RequestMapping(value="/register",method=RequestMethod.POST)

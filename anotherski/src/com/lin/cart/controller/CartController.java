@@ -90,7 +90,8 @@ public class CartController {
 	/*
 	 * 删除所有商品
 	 */
-	public String delAll(@RequestParam("productId") int productId,HttpSession session,Cart c){
+	@RequestMapping(value="/delAll",method=RequestMethod.GET)
+	public String delAll(HttpSession session,Cart c){
 		/* c = (Cart)session.getAttribute("cart");
 		 Iterator <Integer> i = c.container.keySet().iterator();
 		while(i.hasNext()){
@@ -106,6 +107,14 @@ public class CartController {
 		}
 		return "checkout";
 	}
+	/*
+	 * 删除所选商品
+	 */
+	
+	
+	
+	
+	
     /*
      * 查看购物车
      */
